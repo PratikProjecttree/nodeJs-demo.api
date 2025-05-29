@@ -5,4 +5,7 @@ module.exports = {
   RECORD_FETCHED: 'Record fetched successfully',
   RECORDS_FETCHED: 'All Records fetched successfully',
   RECORD_DELETED: 'Record deleted successfully',
+  UNAUTHORIZED: 'Unauthorized',
+  TOKEN_VERIFICATION_FAILED: 'Token verification failed',
+  MISSING_AUTHORIZATION_TOKEN: 'Missing authorization token',
 };

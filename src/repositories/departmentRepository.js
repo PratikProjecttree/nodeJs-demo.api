@@ -1,31 +1,8 @@
-const pool = require('../config/db');
-const getDepartmentsWithLinks = async () => {
-  const query = `
-    SELECT 
-        d.department_id,
-        d.department_name,
-        COALESCE(dcl.link, '[]'::json) AS link
-    FROM 
-        mds.department d
-    LEFT JOIN (
-        SELECT 
-            dcl.department_id,
-            json_agg(
-                jsonb_build_object(
-                    'coa_id', dcl.coa_id,
-                    'coa_name', c.coa_name
-                )
-            ) AS link
-        FROM 
-            bmm.department_coa_link dcl
-        JOIN 
-            bmm.coa c ON c.coa_id = dcl.coa_id
-        GROUP BY 
-            dcl.department_id
-    ) dcl ON dcl.department_id = d.department_id;
-  `;
+const pool = require('../utils/db');
+const { getDepartments } = require('../utils/databaseQuery/departmentQuery');
 
-  const result = await pool.query(query);
+const getDepartmentsWithLinks = async () => {
+  const result = await pool.query(getDepartments);
   return result[0];
 };
 

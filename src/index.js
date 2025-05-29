@@ -1,8 +1,9 @@
 const express = require('express');
-const sequelize = require('./config/db');
+const sequelize = require('./utils/db');
 const mainRouter = require('./routes/mainRouter');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./swagger/swaggerConfig');
+const authHandler = require('./utils/middlewares/authHandler');
 
 const app = express();
 app.use(express.json());
@@ -10,7 +11,7 @@ app.use(express.json());
 // Swagger endpoint
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use('/api', mainRouter);
+app.use('/api',authHandler, mainRouter);
 
 // Global error handler
 app.use(require('./utils/middlewares/errorHandler'));
