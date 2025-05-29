@@ -1,7 +1,12 @@
+// #region Variables 
+
 const userService = require('../services/userService');
 const response = require('../utils/response');
 const message = require('../utils/constants/messages');
 
+// #endregion
+
+// #region Methods 
 const createUserWithRoles = async (req, res) => {
   const data = await userService.createUserWithRoles(req.body);
   response.success(res, data, message.RECORD_CREATED);
@@ -23,3 +28,5 @@ module.exports = {
   createUserWithRoles,
   updateUserWithRoles,
 };
+
+// #endregion

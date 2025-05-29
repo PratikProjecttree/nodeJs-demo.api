@@ -1,6 +1,12 @@
+// #region Variables 
+
 const response = require('../utils/response');
 const message = require('../utils/constants/messages');
 const service = require('../services/lookupService');
+
+// #endregion
+
+// #region Methods 
 
 exports.getAll = async (req, res) => {
   const data = await service.getAll();
@@ -29,3 +35,5 @@ exports.remove = async (req, res) => {
   if (!data) throw { status: 404, message: message.NOT_FOUND };
   response.success(res, null, message.RECORD_DELETED);
 };
+
+// #endregion
